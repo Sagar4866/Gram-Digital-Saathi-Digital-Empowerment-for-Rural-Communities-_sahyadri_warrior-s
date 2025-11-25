@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Empowerment for Rural Communities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2E8B57;
+            --secondary: #3CB371;
+            --accent: #FF7F50;
+            --light: #F5F5F5;
+            --dark: #2F4F4F;
+            --text: #333333;
+            --warning: #FFA500;
+            --danger: #DC143C;
+            --info: #1E90FF;
+            --sidebar-width: 260px;
+            --header-height: 70px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0 20px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            font-size: 28px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .user-actions button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .user-actions .login-btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .user-actions .login-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 20px 100px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h2 {
+            font-size: 24px;
+        }
+
+        .dashboard-nav {
+            background: #f0f0f0;
+            padding: 15px 30px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .dashboard-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .dashboard-nav a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .dashboard-content {
+            padding: 30px;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .stat-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-header h3 {
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        .progress-list {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .progress-info {
+            flex: 1;
+        }
+
+        .progress-info h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .service-content p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .service-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: #ccc;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links, .user-actions {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 20px 80px;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .features, .dashboard, .services {
+                padding: 60px 20px;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            animation: modalFade 0.3s;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .toggle-form {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-seedling"></i>
+            <h1>Digital Empowerment</h1>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        
+        <div class="user-actions">
+            <button class="login-btn" id="openLoginModal">Login</button>
+            <button class="register-btn" id="openRegisterModal">Register</button>
+        </div>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Digital Empowerment for Rural Communities</h2>
+        <p>Bridging the digital divide by providing access to education, essential services, and digital tools for rural populations.</p>
+        <div class="hero-buttons">
+            <a href="#dashboard" class="btn btn-primary">View Dashboard</a>
+            <a href="#services" class="btn btn-secondary">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Our Key Features</h2>
+            <p>Comprehensive digital solutions designed specifically for rural communities</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Digital Literacy Training</h3>
+                <p>Step-by-step courses to improve digital skills, from basic smartphone usage to online services access.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Financial Inclusion</h3>
+                <p>Access to digital banking, government subsidies, and financial services through simplified interfaces.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h3>Healthcare Access</h3>
+                <p>Telemedicine services, health information, and appointment booking with nearby healthcare centers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shopping-basket"></i>
+                </div>
+                <h3>Marketplace</h3>
+                <p>Platform for farmers and artisans to sell products directly to consumers, eliminating middlemen.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Government Services</h3>
+                <p>Simplified access to essential documents, certificates, and government schemes with guided assistance.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor digital adoption, skill development, and service usage with personalized analytics.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard" id="dashboard">
+        <div class="section-title">
+            <h2>Community Progress Dashboard</h2>
+            <p>Track digital adoption and service usage across rural communities</p>
+        </div>
+        
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h2><i class="fas fa-tachometer-alt"></i> Digital Empowerment Dashboard</h2>
+                <div class="date-filter">
+                    <select>
+                        <option>Last 30 Days</option>
+                        <option>Last 3 Months</option>
+                        <option>Last 6 Months</option>
+                        <option>Last Year</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <a href="#" class="active">Overview</a>
+                <a href="#">Digital Literacy</a>
+                <a href="#">Service Usage</a>
+                <a href="#">Regional Data</a>
+                <a href="#">User Progress</a>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: var(--primary);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12,458</h3>
+                            <p>Registered Users</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: var(--info);">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>78%</h3>
+                            <p>Digital Literacy Rate</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: var(--accent);">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>8,942</h3>
+                            <p>Digital Transactions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background-color: var(--warning);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>42%</h3>
+                            <p>Growth in 6 Months</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Digital Service Adoption</h3>
+                            <select>
+                                <option>By Region</option>
+                                <option>By Age Group</option>
+                                <option>By Service Type</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="adoptionChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>Service Usage Distribution</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="usageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="progress-list">
+                    <h3 style="margin-bottom: 20px;">Top Performing Regions</h3>
+                    
+                    <div class="progress-item">
+                        <div class="progress-icon" style="background-color: var(--primary);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Village A - Northern Region</h4>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 85%; background-color: var(--primary);"></div>
+                            </div>
+                        </div>
+                        <div class="progress-percent">85%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-icon" style="background-color: var(--info);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Village B - Eastern Region</h4>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 76%; background-color: var(--info);"></div>
+                            </div>
+                        </div>
+                        <div class="progress-percent">76%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-icon" style="background-color: var(--accent);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Village C - Southern Region</h4>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 68%; background-color: var(--accent);"></div>
+                            </div>
+                        </div>
+                        <div class="progress-percent">68%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-icon" style="background-color: var(--warning);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Village D - Western Region</h4>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 62%; background-color: var(--warning);"></div>
+                            </div>
+                        </div>
+                        <div class="progress-percent">62%</div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-icon" style="background-color: var(--secondary);">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="progress-info">
+                            <h4>Village E - Central Region</h4>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 55%; background-color: var(--secondary);"></div>
+                            </div>
+                        </div>
+                        <div class="progress-percent">55%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2>Our Digital Services</h2>
+            <p>Access essential services through our user-friendly platform</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Digital Education</h3>
+                    <p>Access to online courses, digital skills training, and educational resources tailored for rural learners.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Financial Services</h3>
+                    <p>Digital banking, government subsidy applications, and financial literacy programs.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1584467735871-8db9ac8d55b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Healthcare Access</h3>
+                    <p>Telemedicine consultations, health records, and appointment scheduling with local clinics.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Agricultural Support</h3>
+                    <p>Market prices, weather information, and expert advice for farmers and agricultural workers.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1593115057322-e94b77572f20?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Government Services</h3>
+                    <p>Apply for certificates, access social welfare schemes, and connect with local administration.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1556655848-f3a704976c1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Marketplace</h3>
+                    <p>Sell agricultural products, handicrafts, and local goods directly to buyers across the country.</p>
+                    <a href="#" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Digital Empowerment</h3>
+                <p>Bridging the digital divide for rural communities through accessible technology and services.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#" style="color: white; margin-right: 15px; font-size: 20px;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; margin-right: 15px; font-size: 20px;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: white; margin-right: 15px; font-size: 20px;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: white; font-size: 20px;"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Digital Education</a></li>
+                    <li><a href="#">Financial Services</a></li>
+                    <li><a href="#">Healthcare Access</a></li>
+                    <li><a href="#">Agricultural Support</a></li>
+                    <li><a href="#">Government Services</a></li>
+                    <li><a href="#">Marketplace</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Rural Development Road, Countryside</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                    <li><i class="fas fa-envelope"></i> info@digitalempowerment.org</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Digital Empowerment for Rural Communities. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email or Phone Number</label>
+                    <input type="text" id="loginEmail" placeholder="Enter your email or phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="toggle-form">Create an account</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create an Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Phone Number</label>
+                    <input type="tel" id="registerPhone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerRegion">Region</label>
+                    <select id="registerRegion" required>
+                        <option value="">Select your region</option>
+                        <option value="northern">Northern Region</option>
+                        <option value="eastern">Eastern Region</option>
+                        <option value="southern">Southern Region</option>
+                        <option value="western">Western Region</option>
+                        <option value="central">Central Region</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="toggle-form">Already have an account?</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const openLoginModal = document.getElementById('openLoginModal');
+        const openRegisterModal = document.getElementById('openRegisterModal');
+        const closeModals = document.querySelectorAll('.close-modal');
+        const toggleForms = document.querySelectorAll('.toggle-form');
+
+        openLoginModal.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        openRegisterModal.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+
+        closeModals.forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+
+        toggleForms.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                if (loginModal.style.display === 'flex') {
+                    loginModal.style.display = 'none';
+                    registerModal.style.display = 'flex';
+                } else {
+                    registerModal.style.display = 'none';
+                    loginModal.style.display = 'flex';
+                }
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login functionality would be implemented here with backend integration');
+            loginModal.style.display = 'none';
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Registration functionality would be implemented here with backend integration');
+            registerModal.style.display = 'none';
+        });
+
+        // Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adoption Chart
+            const adoptionCtx = document.getElementById('adoptionChart').getContext('2d');
+            const adoptionChart = new Chart(adoptionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Digital Literacy',
+                        data: [45, 52, 60, 65, 70, 78],
+                        backgroundColor: '#2E8B57',
+                        borderColor: '#2E8B57',
+                        borderWidth: 0
+                    }, {
+                        label: 'Service Usage',
+                        data: [30, 38, 45, 52, 58, 65],
+                        backgroundColor: '#3CB371',
+                        borderColor: '#3CB371',
+                        borderWidth: 0
+                    }, {
+                        label: 'Financial Inclusion',
+                        data: [25, 32, 40, 48, 55, 62],
+                        backgroundColor: '#FF7F50',
+                        borderColor: '#FF7F50',
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Percentage (%)'
+                            },
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    }
+                }
+            });
+
+            // Usage Chart
+            const usageCtx = document.getElementById('usageChart').getContext('2d');
+            const usageChart = new Chart(usageCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Education', 'Financial', 'Healthcare', 'Agriculture', 'Govt Services', 'Marketplace'],
+                    datasets: [{
+                        data: [25, 20, 15, 18, 12, 10],
+                        backgroundColor: [
+                            '#2E8B57',
+                            '#3CB371',
+                            '#FF7F50',
+                            '#1E90FF',
+                            '#FFA500',
+                            '#DC143C'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
